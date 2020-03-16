@@ -1,5 +1,10 @@
 function isCar(car1, car2, car3) {
-    // return 
+    if (car1) {
+        return car1 && car2 && car3;
+    } else {
+        return !car1 && !car2 && !car3
+    }
+
 }
 
 console.log(isCar(true, true, true));
