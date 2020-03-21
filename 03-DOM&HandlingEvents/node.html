@@ -7,7 +7,25 @@
 	<body>
 		<script>
 			// a JavaScript code here ...
-			
+			let body = document.getElementsByTagName("body")[0];
+			let table = document.createElement("table");
+			body.appendChild(table);
+			let value = 1;
+			for(let i=0;i<2;i++){
+				let row = document.createElement("tr");
+				for(let j=0;j<2;j++){
+					let cell = document.createElement("td");
+					cell.innerHTML = value;
+					cell.setAttribute("style", "width:100px");
+					row.appendChild(cell);
+					value++;
+				}
+				table.appendChild(row);
+			}
+			let head = document.getElementsByTagName("head")[0];
+			let style = document.createElement("style");
+			style.innerHTML = "table, td {border: 1px solid black; border-collapse: collapse; text-align: center;}";
+			head.appendChild(style);
 		</script>
 	</body>
 </html>

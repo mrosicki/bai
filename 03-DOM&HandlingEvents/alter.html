@@ -20,7 +20,39 @@
 		and psychedelic music.</p>
 		
 		<script>
-			// a JavaScript code here ...
+			document.getElementsByTagName("h1")[0].setAttribute("onClick", "part2(this)");
+			document.getElementsByTagName("h3")[0].setAttribute("onClick", "displayDesc()");
+			document.getElementsByTagName("p")[0].setAttribute("onClick", "toItalic(this)");
+			document.getElementsByTagName("html")[0].setAttribute("ondblclick", "background()");
+			document.getElementsByTagName("p")[0].setAttribute("onCopy", "copyright()");
+			document.getElementsByTagName("p")[1].setAttribute("onClick", "addPicture()");
+			
+			function addPicture(){
+				var picture = document.createElement("img");
+				picture.setAttribute("src", "https://upload.wikimedia.org/wikipedia/en/d/d6/Pink_Floyd_-_all_members.jpg");
+				document.getElementsByTagName("body")[0].appendChild(picture);
+			}
+
+			function copyright(){
+				window.alert("Please don't steal our lyrics :)");
+			}
+			
+			function background(){
+				document.getElementsByTagName("body")[0].setAttribute("bgcolor", "yellow");
+			}
+
+			function toItalic(element){
+				let par = element.innerHTML;
+				element.innerHTML = "<i>"+par+"</i>";
+
+			}
+			function displayDesc(){
+				document.getElementsByTagName("p")[1].setAttribute("style", "visibility: visible;");
+			}
+
+			function part2(element){
+				element.innerHTML = element.innerHTML + " (Part 2)";
+			}
 			
 		</script>
 	</body>

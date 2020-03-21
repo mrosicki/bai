@@ -16,9 +16,15 @@
 
 	<script>
 		// a JavaScript code here ...
-		var university = "Cracow University of Economics";
-		var address = "Rakowicka 27, Krakow, POLAND";
-
+		document.getElementsByTagName("button")[0].setAttribute("onClick", "fill()");
+		function fill(){
+			var university = "Cracow University of Economics";
+			var address = "Rakowicka 27, Krakow, POLAND";
+			universityField = document.getElementsByTagName("input")[0];
+			addressField = document.getElementsByTagName("input")[1];
+			universityField.value = university;
+			addressField.value = address;
+		}
 	</script>
 </body>
 
