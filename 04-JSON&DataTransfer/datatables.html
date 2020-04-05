@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>List of people in datatable</title>
+        <meta charset="UTF-8">
+        <script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
+    </head>
+    <body>
+        <table id="datatable" class='display' style="width: 100%;">
+            <thead>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Country</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <script>
+        $(document).ready(function(){
+            connect();
+        });
+
+        function connect(){
+				var method = 'GET';
+				var URL = 'http://127.0.0.1:8000/people.json';
+				var xhr = new XMLHttpRequest();
+                xhr.responseType = 'json';
+				xhr.onreadystatechange = function(){display(this);};
+				xhr.open(method, URL);
+				xhr.send();
+			};
+		function display(r){
+                var tableBody = document.getElementsByTagName('tbody')[0];
+				if(r.status == 200 && r.readyState == 4){
+                    for(let person in r.response){
+                        var newRow = document.createElement('tr');
+
+                        var name = document.createElement('td');
+                        name.innerHTML = r.response[person].name;
+                        newRow.appendChild(name);
+
+                        var surname = document.createElement('td');
+                        surname.innerHTML = (r.response[person].surname+"").toLocaleUpperCase();
+                        newRow.appendChild(surname);
+
+                        var country = document.createElement('td');
+                        country.innerHTML = r.response[person].country;
+                        newRow.appendChild(country);
+
+                        tableBody.appendChild(newRow);
+
+                    }
+                    var table = document.getElementById('datatable')
+                    $('#datatable').DataTable();
+
+				}
+			};
+        </script>
+    </body>
+</html>

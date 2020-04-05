@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Chart</title>
+        <meta charset="UTF-8">
+        <script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+        <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+    </head>
+    <body>
+        <div>
+            <canvas id="myChart" width="100" height="100"></canvas>
+        </div>
+        <script>
+            $(document).ready(function(){
+                connect();
+            });
+
+            function connect(currency){
+                var method = 'GET';
+                var URL = 'http://api.nbp.pl/api/cenyzlota/last/10';
+                var xhr = new XMLHttpRequest();
+                xhr.responseType = 'json';
+                xhr.onreadystatechange = function(){display(this);};
+                xhr.open(method, URL);
+                xhr.send();
+            };
+
+            function display(r){
+                if(r.status == 200 && r.readyState == 4){
+                    var dates = [];
+                    var prices = [];
+                    for(let item in r.response){
+                        dates.push(r.response[item].data)
+                        prices.push(r.response[item].cena)
+                    }
+                    console.log(r.response);
+
+                    var ctx = document.getElementById("myChart");
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            "labels": dates,
+                            "datasets": [
+                                {
+                                    "label": "Gold Price",
+                                    "data": prices,
+                                    "fill": false,
+                                    "borderColor": "rgb(255, 255, 0)"
+                                }
+                            ]
+                        }
+                    });
+                    myChart.canvas.parentNode.style.height='400px';
+                    myChart.canvas.parentNode.style.width='400px';
+                }
+            };
+        </script>
+    </body>
+</html>
