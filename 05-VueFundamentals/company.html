@@ -4,6 +4,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+  <div id="app" style="width: fit-content; border: solid black 1px;  padding-left: 5%; padding-right: 5%;">
+    <p style="text-align: center;">
+      {{company | uppercase}}<br>
+      {{address}}<br>
+      {{postcode}} {{city}}<br>
+      tel. {{landline}}, {{mobile}}<br>
+      <a v-bind:href="web">{{web}}</a>
+    </p>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -15,6 +24,15 @@
         landline: '22 345 90 21',
         mobile: '888 213 992',
         web: 'http://www.unikpol.pl'
+      },
+      filters: {
+        uppercase: function(value){
+          if (!value) {
+            return '';
+          }
+      
+          return value.toString().toUpperCase();
+        }
       }
     });
   </script>

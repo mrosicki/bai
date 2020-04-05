@@ -4,6 +4,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+  <div id="app">
+    <b>EMPLOYEE RECORD</b><br>
+    Name 1: {{name1}}<br>
+    <div v-if="hasName2">Name 2: {{name2}}<br></div>
+    Surname: {{surname}}<br>
+    <div v-if="nationality == 'Polish'">Pesel: {{pesel}}<br></div>
+    <div v-else>Nationality: {{nationality}}<br></div>
+    Address: {{address}}
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -15,6 +24,24 @@
         nationality: 'Polish',
         pesel: '92021708229',
         address: 'ul. Szeroka 3, Kraków',
+      },
+      data: {
+        name1: 'John',
+        surname: 'Brown',
+        foreigner: true,
+        nationality: 'USA',
+        address: 'Holland Drive 4, Chicago',
+      },
+      computed: {
+        hasName2: function () {
+          if(this.name2){
+            return true;
+          }
+          else{
+            return false;
+          }
+        }
+      }
     });
   </script>
 

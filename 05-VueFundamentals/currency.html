@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table, thead, tbody, tr, td, th {border: solid black 1px;}
+    table {border-collapse: collapse; width: 50%;}
+  </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <table>
+        <thead>
+          <th v-for="(value, name) in rates[0]">
+            {{name | capitalize}}
+          </th>
+        </thead>      
+        <tbody>
+          <tr v-for="rate in rates">
+            <td>{{rate.currency}}</td>
+            <td>{{rate.code}}</td>
+            <td>{{rate.mid | formatDecimals}}</td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+          rates: []
+      },
+      created() {
+        var method = 'GET';
+        var vue = this;
+        var URL = 'http://api.nbp.pl/api/exchangerates/tables/a/';
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'json';
+        xhr.onreadystatechange = function () {
+          if(xhr.status == 200 && xhr.readyState == 4){
+            vue.rates = xhr.response[0].rates;
+          }
+        }
+        xhr.open(method, URL, true);
+        xhr.send();
+      },
+      filters: {
+        capitalize: function (value) {
+          if (!value) return ''
+          value = value.toString()
+          return value.charAt(0).toUpperCase() + value.slice(1)
+        },
+        formatDecimals: function (value){
+          return value.toFixed(4);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

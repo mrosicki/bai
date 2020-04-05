@@ -1,9 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+      table, thead, tbody, tr, td, th {border: solid black 1px;}
+      table {border-collapse: collapse; width: 50%;}
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+  <div id="app">
+    <table>
+      <thead>
+        <th v-for="(value, name) in films[0]">
+          {{name | capitalize}}
+        </th>
+      </thead>
+      <tbody>
+        <tr v-for="film in films">
+          <td>{{film.title}}</td>
+          <td>{{film.year}}</td>
+          <td>{{film.director}}</td>
+          <td>{{film.budget | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -34,6 +55,21 @@
             budget: 6000000
           }
         ] 
+        },
+      filters: {
+        capitalize: function (value) {
+          if (!value) return ''
+          value = value.toString()
+          return value.charAt(0).toUpperCase() + value.slice(1)
+        },
+        currency: function (value) {
+          var formatter = new Intl.NumberFormat('pl', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            
+          });
+          return '$' + formatter.format(value).replace('USD', '');
         }
       }
     });
