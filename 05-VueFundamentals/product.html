@@ -15,7 +15,7 @@
       Amount: {{product.quantity*product.unitPrice}}<br>
       VAT Tax Rate: {{product.VAT}}%<br>
       ==============<br>
-      <b>Total: {{product.quantity*product.unitPrice + (product.quantity*product.unitPrice*product.VAT/100)}}</b>
+      <b>Total: {{product.quantity*product.unitPrice + (product.quantity*product.unitPrice*product.VAT/100) | formatDecimals}} zł</b>
 
     </p>
   </div>    
@@ -29,6 +29,11 @@
           unitPrice: 17.5,
           quantity: 3,
           VAT: 23
+        }
+      },
+      filters: {
+        formatDecimals: function (value){
+          return value.toFixed(2);
         }
       }
     });
