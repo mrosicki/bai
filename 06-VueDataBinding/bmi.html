@@ -7,15 +7,22 @@
   <h1>Body Mass Index</h1>
   <div id="app">
     <span>Waga: </span>
-    <input> kg<br>
+    <input v-model.number="height"> kg<br>
     <span>Wzrost: </span>
-    <input> cm
-    <p>Wskaźnik BMI:</p>
+    <input v-model.number="weight"> cm
+    <p>Wskaźnik BMI: {{bmi}}</p>
   </div>
   <script>
     var app = new Vue({
       el: '#app',
       data: {
+        height: 0,
+        weight: 0
+      },
+      computed: {
+        bmi: function() {
+          return this.weight/(this.height*this.height);
+        }
       }
     });
   </script>

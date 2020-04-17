@@ -5,19 +5,17 @@
 </head>
 <body>
   <div id="app">
-    <span>Your name:</span>
-    <input type="text" v-model="name">  
+    <button v-on:click='inc()'>{{counter}}</button>
   </div>
   <script>
     var app = new Vue({
       el: '#app',
       data: {
-        name: ''
+        counter: 0
       },
-      watch: {
-        name: function(val) {
-          this.name = val;
-          console.log(this.name);
+      methods: {
+        inc() {
+          this.counter = this.counter + 1;
         }
       }
     });

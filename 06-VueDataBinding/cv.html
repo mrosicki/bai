@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p><span>Imie:</span> <input type="text" v-model="name"></p>
+    <p><span>Nazwisko:</span> <input type="text" v-model="surname"></p>
+    <p><span>Wiek:</span> <input type="text" v-model.number="age"></p>
+    <p><span>Płeć:</span>
+    <select v-model="gender">
+      <option>Mężczyzna</option>
+      <option>Kobieta</option>
+    </select>
+    </p>
+    <p><span>Wykształcenie:</span>
+    <select v-model="education">
+      <option>Brak</option>
+      <option>Podstawowe</option>
+      <option>Średnie</option>
+      <option>Wyższe</option>
+    </select>
+    </p>
+    <p>
+      <span>Umiejętności:</span>
+      <input type="checkbox" id="computer_skills" value="computer_skills" v-model="skills">
+      <label for="jack">Obsługa komputera</label>
+      <input type="checkbox" id="driving_license" value="driving_license" v-model="skills">
+      <label for="john">Prawo jazdy</label>
+      <input type="checkbox" id="creativity" value="creativity" v-model="skills">
+      <label for="mike">Kreatywność</label>
+      <input type="checkbox" id="work_in_team" value="work_in_team" v-model="skills">
+      <label for="mike">Praca w zespole</label>
+    </p>
+
+    <button type="button" v-on:click="save()">Zapisz</button>
+    <button type="button" v-on:click="save_to_storage()">Zapisz do schowka</button>
+    <button type="button" v-on:click="read_from_storage()">Czytaj ze schowka</button>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        name: '',
+        surname: '',
+        age: 0,
+        gender: 'Mężczyzna',
+        education: 'Brak',
+        skills: [],
+        cv: {
+          name: '',
+          surname: '',
+          age: 0,
+          gender: 'Mężczyzna',
+          education: 'Brak',
+          skills: []
+        }
+      },
+      methods: {
+        save() {
+          this.cv.name = this.name;
+          this.cv.surname = this.surname;
+          this.cv.age = this.age;
+          this.cv.gender = this.gender;
+          this.cv.education = this.education;
+          this.cv.skills = this.skills;
+        },
+        save_to_storage() {
+          this.save();
+          localStorage.cv = JSON.stringify(this.cv);
+        },
+        read_from_storage() {
+          if(localStorage.cv){
+            cv = JSON.parse(localStorage.cv)
+            this.name = cv.name;
+            this.surname = cv.surname;
+            this.age = cv.age;
+            this.gender = cv.gender;
+            this.education = cv.education;
+            this.skills = cv.skills;
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
