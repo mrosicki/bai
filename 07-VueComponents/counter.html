@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <counter v-bind:natural="natural"></counter>
+    <button v-on:click="add()">Dodaj</button>
+    <button v-on:click="subtract()">Odejmij</button>
+  </div>
+
+
+
+
+  <script type="text/x-template" id="counter-template">
+    <div>
+      <p>{{natural}}</p>
+    </div>
+  </script> 
+
+  <script>
+    Vue.component('counter', {
+      template: '#counter-template',
+      props: {
+          natural: Number,
+      }
+    })
+  
+
+    new Vue({
+      el: '#app',
+      data: {
+        natural: 0
+      },
+      methods:{
+        add: function() {
+          this.natural = this.natural+1;
+        },
+        subtract: function() {
+          this.natural = this.natural-1;
+        },
+      }
+    })
+  </script>
+  
+
+</body>
+</html>

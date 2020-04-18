@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <binaryconverter v-for='number in naturals' v-bind:natural='number'></binaryconverter>
+  </div>
+
+
+
+  <script type="text/x-template" id="binary-converter-template">
+    <div>
+      <p>{{natural}}(10) = {{binary}}(2)</p>
+    </div>
+  </script> 
+
+  <script>
+    Vue.component('binaryconverter', {
+      template: '#binary-converter-template',
+      props: {
+          natural: Number,
+      },
+      computed: {
+        binary: function() {
+          return this.natural.toString(2);
+        }
+      }
+    })
+  
+
+    new Vue({
+      el: '#app',
+      data: {
+        naturals: [8, 170, 204, 3855] 
+      }
+
+    })
+  </script>
+  
+
+</body>
+</html>

@@ -4,9 +4,27 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+  <div id="app">
+    <university-address></university-address>
+  </div>
 
-  <h1>Cracow University of Economics</h1>
-  <p>31-510 Kraków, Rakowicka 27, POLAND</p>
+  <script type="text/x-template" id="university-address-template">
+    <div>
+      <h1>Cracow University of Economics</h1>
+      <p>31-510 Kraków, Rakowicka 27, POLAND</p>
+    </div>
+  </script> 
 
+  <script>
+    Vue.component('university-address', {
+      template: '#university-address-template'
+    })
+  
+
+    new Vue({
+      el: '#app'
+    })
+
+  </script>
 </body>
 </html>

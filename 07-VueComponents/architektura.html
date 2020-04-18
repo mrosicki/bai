@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <part v-bind:names="part_names"></part>
+  </div>
+
+
+
+  <script type="text/x-template" id="part-template">
+    <div>
+      <h1>Von Neumann Architecture</h1>
+      <p v-for="part_name in names">{{part_name}}</p>
+    </div>
+  </script> 
+  
+  <script>
+    Vue.component('part', {
+      template: '#part-template',
+      props: {
+          names: Array,
+      }
+    })
+  
+
+    new Vue({
+      el: '#app',
+      data: {
+        part_names: [
+          'Memory',
+          'Processing Unit',
+          'Input',
+          'Output',
+          'Control Unit'
+        ] 
+      }
+
+    })
+  </script>
+  
+
+</body>
+</html>
